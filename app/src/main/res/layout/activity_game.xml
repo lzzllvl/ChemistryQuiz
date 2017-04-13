@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_game"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.greg.chemistryquiz.GameActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:id="@+id/question_number"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="14sp" />
+
+    <Button
+        android:text="Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_ansFour"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/button_ansOne"
+        android:layout_alignStart="@+id/button_ansOne"
+        android:layout_marginBottom="55dp" />
+
+    <Button
+        android:text="Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_ansThree"
+        android:layout_alignBaseline="@+id/button_ansFour"
+        android:layout_alignBottom="@+id/button_ansFour"
+        android:layout_alignLeft="@+id/button_ansTwo"
+        android:layout_alignStart="@+id/button_ansTwo" />
+
+    <Button
+        android:text="Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_ansTwo"
+        android:layout_above="@+id/button_ansThree"
+        android:layout_toLeftOf="@+id/question_number"
+        android:layout_toStartOf="@+id/question_number"
+        android:layout_marginBottom="24dp" />
+
+    <TextView
+        android:text="Be"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/mainText"
+        android:textAppearance="@android:style/TextAppearance.Large"
+        android:height="@dimen/big_height"
+        android:layout_marginTop="12dp"
+        android:layout_below="@+id/question_number"
+        android:layout_centerHorizontal="true"
+        android:textSize="@dimen/big_font" />
+
+    <Button
+        android:text="Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_ansOne"
+        android:layout_alignBaseline="@+id/button_ansTwo"
+        android:layout_alignBottom="@+id/button_ansTwo"
+        android:layout_toRightOf="@+id/question_number"
+        android:layout_toEndOf="@+id/question_number" />
+</RelativeLayout>
