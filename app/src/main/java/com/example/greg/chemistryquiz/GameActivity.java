@@ -3,8 +3,13 @@ package com.example.greg.chemistryquiz;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.AssetFileDescriptor;
+import android.content.res.AssetManager;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -12,6 +17,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.security.SecureRandom;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -46,6 +52,9 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
     private SecureRandom random = new SecureRandom();
 
+    private SoundPool soundPool;
+    int sample = -1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +62,15 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         addListener();
         updateScore();
         setButtonText(ansOne, ansTwo, ansThree, ansFour);
+        soundPool = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
+        try {
+            AssetManager assetManager = getAssets();
+            AssetFileDescriptor descriptor;
+            descriptor = assetManager.openFd("lasershoot.ogg");
+            sample = soundPool.load(descriptor, 0);
+        } catch(IOException e){
+
+        }
     }
 
     public void updateScore() {
@@ -88,7 +106,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             correct++;
             questions_left--;
             Toast.makeText(GameActivity.this, "Correct, L337", Toast.LENGTH_SHORT).show();
-
+            soundPool.play(sample, 1,1,0,0,1);
             nextQuestion();
 
 
@@ -172,28 +190,38 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+
+        shake_animation = AnimationUtils.loadAnimation(this, R.anim.incorrect_shake);
+        shake_animation.setRepeatCount(3);
         switch (v.getId()) {
+
             case R.id.button_ansOne:
                 if (!isCorrect(ansOneText, ansCorrect)) {
                     ansOne.setEnabled(false);
+                    ansOne.startAnimation(shake_animation);
                 }
                 respondToInput(isCorrect(ansOneText, ansCorrect));
                 break;
             case R.id.button_ansTwo:
                 if (!isCorrect(ansTwoText, ansCorrect)) {
                     ansTwo.setEnabled(false);
+                    ansTwo.startAnimation(shake_animation);
+
                 }
                 respondToInput(isCorrect(ansTwoText, ansCorrect));
                 break;
             case R.id.button_ansThree:
                 if (!isCorrect(ansThreeText, ansCorrect)) {
                     ansThree.setEnabled(false);
+                    ansThree.startAnimation(shake_animation);
                 }
                 respondToInput(isCorrect(ansThreeText, ansCorrect));
                 break;
             case R.id.button_ansFour:
                 if (!isCorrect(ansFourText, ansCorrect)) {
                     ansFour.setEnabled(false);
+                    ansFour.startAnimation(shake_animation);
+
                 }
                 respondToInput(isCorrect(ansFourText, ansCorrect));
                 break;

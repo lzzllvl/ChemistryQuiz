@@ -47,8 +47,8 @@
         android:id="@+id/button_ansTwo"
         android:layout_above="@+id/button_ansThree"
         android:layout_toLeftOf="@+id/question_number"
-        android:layout_toStartOf="@+id/question_number"
-        android:layout_marginBottom="24dp" />
+        android:layout_marginBottom="24dp"
+        android:elevation="0dp" />
 
     <TextView
         android:text="Be"
